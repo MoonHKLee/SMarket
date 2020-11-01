@@ -1,0 +1,119 @@
+<head>
+    <title>상품 등록</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<style>
+    #divheader {
+        background-color: black;
+    }
+</style>
+
+
+<hr>
+<div class="container bootstrap snippet">
+    <div id="divheader" class="row">
+        <div class="col-sm-10"><h1><font color="white">상품 등록</font></h1></div>
+        <div class="col-sm-2"><a href="/users" class="pull-right"><img title="product image" src="img/bag.jpg"
+                                                                       style="width: 100px; height: 100px;"></a></div>
+    </div>
+    <p>&nbsp;</p>
+    <p>&nbsp;</p>
+    <div class="row">
+        <div class="col-sm-3"><!--left col-->
+
+            <div class="text-center">
+                <img src="img/product.jpg" class="avatar img-circle img-thumbnail" alt="avatar">
+                <h6>상품 사진을 올려주세요.</h6>
+                <input type="file" class="text-center center-block file-upload">
+            </div>
+            </hr><br>
+
+
+        </div><!--/col-3-->
+        <div class="col-sm-9">
+            <ul class="nav nav-tabs">
+                <li class="active"><a data-toggle="tab" href="#home">정보</a></li>
+            </ul>
+
+
+            <div class="tab-content">
+                <div class="tab-pane active" id="home">
+                    <hr>
+                    <form class="form" action="##" method="post" id="registrationForm">
+                        <div class="form-group">
+
+                            <div class="col-xs-6">
+                                <label for="usermarket"><h4>시장 이름</h4></label>
+                                <input type="text" class="form-control" name="usermarket" id="usermarket"
+                                       placeholder="시장" title="시장 이름을 적어주세요.">
+                            </div>
+                        </div>
+                        <div class="form-group">
+
+                            <div class="col-xs-6">
+                                <label for="userstore"><h4>가게 이름</h4></label>
+                                <input type="text" class="form-control" name="userstore" id="userstore" placeholder="상점"
+                                       title="가게 이름을 적어주세요.">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+
+                            <div class="col-xs-6">
+                                <label for="phone"><h4>연락처</h4></label>
+                                <input type="text" class="form-control" name="phone" id="phone"
+                                       placeholder="010-0000-0000" title="연락처를 남겨주세요.">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-xs-6">
+                                <label for="price"><h4>가격</h4></label>
+                                <input type="text" class="form-control" name="price" id="price" placeholder="원"
+                                       title="가격을 적어주세요.">
+                            </div>
+                        </div>
+                        <div class="form-group">
+
+                            <div class="col-xs-6">
+                                <label for="weight"><h4>무게/단위</h4></label>
+                                <input type="weight" class="form-control" name="weight" id="weight" placeholder="kg/ml"
+                                       title="상품의 무게를 적어주세요.">
+                            </div>
+                        </div>
+                        <div class="form-group">
+
+                            <div class="col-xs-6">
+                                <label for="name"><h4>판매자 성함</h4></label>
+                                <input type="name" class="form-control" id="name" placeholder="name"
+                                       title="판매자 이름을 남겨주세요.">
+                            </div>
+                        </div>
+                        <div class="form-group">
+
+                            <div class="col-xs-6">
+                                <label for="appeal"><h4>상품 자랑 한마디</h4></label>
+                                <input type="appeal" class="form-control" name="appeal" id="appeal" placeholder="한마디"
+                                       title="상품을 자랑해주세요!">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-xs-12">
+                                <br>
+                                <button class="btn btn-lg btn-success" type="submit"><i
+                                        class="glyphicon glyphicon-ok-sign"></i> 등록
+                                </button>
+                                <button class="btn btn-lg" type="reset"><i class="glyphicon glyphicon-repeat"></i> 다시
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div><!--/tab-pane-->
+            </div><!--/col-9-->
+        </div><!--/row-->
+    </div>
+</div>

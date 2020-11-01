@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" >
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/login.css">
+    <title>Document</title>
+</head>
+
+<body>
+<div class="wrap">
+    <div class="form-wrap">
+        <div class="button-wrap">
+            <div id="btn"></div>
+            <button type="button" class="togglebtn" onclick="businessLoginChange()">사업자</button>
+            <button type="button" class="togglebtn" onclick="personLoginChange()">일반인</button>
+        </div>
+        <div class="social-icons">
+            <div>장보러 가자</div>
+        </div>
+        <form id="businessLoginChange" action="/controller/signup/business" class="input-group">
+            <label>
+                <input type="text" class="input-field" placeholder="아이디" >
+            </label>
+            <label>
+                <input type="password" class="input-field" placeholder="비밀번호" >
+            </label>
+            <button type="submit" class="signup" th:method="get" th:href="@{/register-business}">회원가입</button>
+            <button type="submit" class="submit">Login</button>
+        </form>
+
+
+        <form id="personLoginChange" action="/controller/signup/client" class="input-group">
+            <label>
+                <input type="text" class="input-field" placeholder="아이디" >
+            </label>
+            <label>
+                <input type="password" class="input-field" placeholder="비밀번호" >
+            </label>
+            <button type="submit" class="signup">회원가입</button>
+            <button type="submit" class="submit">Login</button>
+        </form>
+    </div>
+</div>
+<script>
+    var x = document.getElementById("businessLoginChange");
+    var y = document.getElementById("personLoginChange");
+    var z = document.getElementById("btn");
+
+
+    function businessLoginChange(){
+        x.style.left = "50px";
+        y.style.left = "450px";
+        z.style.left = "0";
+    }
+
+    function personLoginChange(){
+        x.style.left = "-400px";
+        y.style.left = "50px";
+        z.style.left = "110px";
+    }
+</script>
+</body>
+</html>

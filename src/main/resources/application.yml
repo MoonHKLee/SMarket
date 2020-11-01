@@ -1,0 +1,17 @@
+## MYSQL CONFIG
+spring:
+  jpa:
+    show-sql: true
+    generate-ddl: true
+    hibernate:
+      ddl-auto: update
+    database: mysql
+    database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
+    open-in-view: false
+  datasource:
+#    url: jdbc:mysql://nutee.cmwlqxe5se7d.ap-northeast-2.rds.amazonaws.com:3306/s_market?useUnicode=true&characterEncoding=UTF-8
+    url: jdbc:mysql://127.0.0.1:3306/s_market?useUnicode=true&characterEncoding=UTF-8
+    username: root
+    password: P@ssw0rd
+  main:
+    allow-bean-definition-overriding: true
