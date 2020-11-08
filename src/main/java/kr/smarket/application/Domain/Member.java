@@ -1,52 +1,37 @@
 package kr.smarket.application.Domain;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import kr.smarket.application.Domain.Common.LogDateTime;
+import lombok.Getter;
+import lombok.Setter;
+
+import javax.persistence.*;
 
 @Entity
-public class Member {
+@Getter
+@Setter
+public class Member extends LogDateTime {
 
-    @Id @GeneratedValue
+    @Id
+    @GeneratedValue(strategy= GenerationType.IDENTITY)
+    @Column(name = "member_id")
     private Long id;
 
-    @Column(unique = true)
+    @Column(nullable=false, unique=true, length=20)
     private String username;
+
+    @Column(nullable=false, unique=true, length=20)
+    private String nickname;
 
     private String password;
 
+    private Region region;
+
+    @Column(nullable=false, length=50)
+    private String email;
+
+    private String address;
+
+    private String userType;
+
     private String role;
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public String getRole() {
-        return role;
-    }
-
-    public void setRole(String role) {
-        this.role = role;
-    }
 }

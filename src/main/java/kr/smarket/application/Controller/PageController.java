@@ -10,7 +10,7 @@ import java.security.Principal;
 public class PageController {
 
     @GetMapping("/")
-    public String index(Model model, Principal principal) {
+    public String getIndexPage(Model model, Principal principal) {
         if (principal == null) {
             model.addAttribute("message","Hello, Spring Security");
         } else {
@@ -20,27 +20,31 @@ public class PageController {
     }
 
     @GetMapping("/login")
-    public String login(Model model) {
+    public String getLoginPage(Model model) {
         return "login";
     }
 
-    @GetMapping("/logout")
-    public String logout(Model model) {
-        return "logout";
-    }
-
     @GetMapping("/register")
-    public String register(Model model) {
+    public String getRegisterPage(Model model) {
         return "register";
     }
 
     @GetMapping("/signup-business")
-    public String signupBusiness(Model model) {
+    public String getSignupBusinessPage(Model model) {
         return "registerBusiness";
     }
 
     @GetMapping("/signup-client")
-    public String signupClient(Model model) {
+    public String getSignupClientPage(Model model) {
         return "registerClient";
+    }
+
+    @GetMapping("/opinion")
+    public String getOpinionPage(Model model) {
+        return "opinion";
+    }
+    @GetMapping("/search")
+    public String getSearchPage(Model model) {
+        return "search";
     }
 }
