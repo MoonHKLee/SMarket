@@ -1,4 +1,4 @@
-package kr.smarket.application.Domain;
+package kr.smarket.application.Domain.Enum;
 
 public enum Category {
     NONG_SAN_MUL,

@@ -1,8 +1,10 @@
 package kr.smarket.application.Controller;
 
+import kr.smarket.application.DTO.SignUpBusinessRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 
 import java.security.Principal;
 
@@ -30,7 +32,7 @@ public class PageController {
     }
 
     @GetMapping("/signup-business")
-    public String getSignupBusinessPage(Model model) {
+    public String getSignupBusinessPage(@ModelAttribute(name = "request") SignUpBusinessRequest request, Model model) {
         return "registerBusiness";
     }
 

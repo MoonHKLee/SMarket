@@ -1,4 +1,4 @@
-package kr.smarket.application.Domain;
+package kr.smarket.application.Domain.Enum;
 
 public enum Region {
     SEOUL,
@@ -17,5 +17,6 @@ public enum Region {
     JEONBUK,
     JEONNAM,
     JEJU,
-    SEJONG
+    SEJONG,
+    NONE
 }

@@ -1,14 +1,18 @@
 package kr.smarket.application.Domain;
 
 import kr.smarket.application.Domain.Common.LogDateTime;
-import lombok.Getter;
-import lombok.Setter;
+import kr.smarket.application.Domain.Enum.Region;
+import kr.smarket.application.Domain.Enum.Role;
+import kr.smarket.application.Domain.Enum.UserType;
+import lombok.*;
 
 import javax.persistence.*;
 
 @Entity
-@Getter
-@Setter
+@Getter @Setter
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class Member extends LogDateTime {
 
     @Id
@@ -17,13 +21,14 @@ public class Member extends LogDateTime {
     private Long id;
 
     @Column(nullable=false, unique=true, length=20)
-    private String username;
+    private String userName;
 
     @Column(nullable=false, unique=true, length=20)
-    private String nickname;
+    private String userId;
 
     private String password;
 
+    @Enumerated(EnumType.STRING)
     private Region region;
 
     @Column(nullable=false, length=50)
@@ -31,7 +36,11 @@ public class Member extends LogDateTime {
 
     private String address;
 
-    private String userType;
+    private String phoneNumber;
 
-    private String role;
+    @Enumerated(EnumType.STRING)
+    private UserType userType;
+
+    @Enumerated(EnumType.STRING)
+    private Role role;
 }

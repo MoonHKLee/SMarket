@@ -26,14 +26,14 @@
                    <h2 class="title">회원가입</h2>
                </div>
                <div class="card-body">
-                   <form method="POST">
+                   <form th:action="@{/signup-business}" th:object="${request}" th:method="post">
                        <div class="form-row m-b-55">
                            <div class="name">이름</div>
                            <div class="value">
                                <div class="row row-space">
                                    <div class="col-2">
                                        <div class="input-group-desc">
-                                           <input class="input--style-5" type="text" name="name">
+                                           <input class="input--style-5" type="text" th:name="userName">
                                        </div>
                                    </div>
                                </div>
@@ -43,7 +43,7 @@
                            <div class="name">아이디</div>
                            <div class="value">
                                <div class="input-group">
-                                   <input class="input--style-5" type="text" name="id">
+                                   <input class="input--style-5" type="text" th:name="userId">
                                </div>
                            </div>
                        </div>
@@ -52,7 +52,16 @@
                            <div class="name">비밀번호</div>
                            <div class="value">
                                <div class="input-group">
-                                   <input class="input--style-5" type="text" name="password">
+                                   <input class="input--style-5" type="password" th:name="password">
+                               </div>
+                           </div>
+                       </div>
+
+                       <div class="form-row">
+                           <div class="name">비밀번호 확인</div>
+                           <div class="value">
+                               <div class="input-group">
+                                   <input class="input--style-5" type="password">
                                </div>
                            </div>
                        </div>
@@ -62,26 +71,28 @@
                            <div class="value">
                                <div class="input-group">
                                    <div class="rs-select2 js-select-simple select--no-search">
-                                       <select name="subject">
-                                           <option disabled="disabled" selected="selected">지역을 선택하세요</option>
-                                           <option>서울특별시</option>
-                                           <option>인천광역시</option>
-                                           <option>대전광역시</option>
-                                           <option>대구광역시</option>
-                                           <option>광주광역시</option>
-                                           <option>부산광역시</option>
-                                           <option>울산광역시</option>
-                                           <option>경기도</option>
-                                           <option>강원도</option>
-                                           <option>충청북도</option>
-                                           <option>충청남도</option>
-                                           <option>경상북도</option>
-                                           <option>경상남도</option>
-                                           <option>전라북도</option>
-                                           <option>전라남도</option>
-                                           <option>세종시</option>
-                                           <option>제주도</option>
-                                       </select>
+                                       <label>
+                                           <select th:name="region">
+                                               <option disabled="disabled" selected="selected">지역을 선택하세요</option>
+                                               <option th:value="SEOUL">서울특별시</option>
+                                               <option th:value="INCHEON">인천광역시</option>
+                                               <option th:value="DAEJEON">대전광역시</option>
+                                               <option th:value="DAEGU">대구광역시</option>
+                                               <option th:value="GWANGJU">광주광역시</option>
+                                               <option th:value="BOOSAN">부산광역시</option>
+                                               <option th:value="ULSAN">울산광역시</option>
+                                               <option th:value="GYEONGGI">경기도</option>
+                                               <option th:value="GANGWON">강원도</option>
+                                               <option th:value="CHUNGBUK">충청북도</option>
+                                               <option th:value="CHUNGNAM">충청남도</option>
+                                               <option th:value="GYEONGBUK">경상북도</option>
+                                               <option th:value="GYEONGNAM">경상남도</option>
+                                               <option th:value="JEONBUK">전라북도</option>
+                                               <option th:value="JEONNAM">전라남도</option>
+                                               <option th:value="SEJONG">세종시</option>
+                                               <option th:value="JEJU">제주도</option>
+                                           </select>
+                                       </label>
                                        <div class="select-dropdown"></div>
                                    </div>
                                </div>
@@ -92,7 +103,7 @@
                            <div class="name">주소</div>
                            <div class="value">
                                <div class="input-group">
-                                   <input class="input--style-5" type="text" name="address">
+                                   <input class="input--style-5" type="text" th:name="address">
                                </div>
                            </div>
                        </div>
@@ -101,7 +112,16 @@
                            <div class="name">이메일</div>
                            <div class="value">
                                <div class="input-group">
-                                   <input class="input--style-5" type="email" name="email">
+                                   <input class="input--style-5" type="email" th:name="email">
+                               </div>
+                           </div>
+                       </div>
+
+                       <div class="form-row">
+                           <div class="name">전화번호</div>
+                           <div class="value">
+                               <div class="input-group">
+                                   <input class="input--style-5" type="text" th:name="phoneNumber" placeholder="ex) 010-0000-0000">
                                </div>
                            </div>
                        </div>
@@ -110,7 +130,7 @@
                            <div class="name">시장이름</div>
                            <div class="value">
                                <div class="input-group">
-                                   <input class="input--style-5" type="text" name="marketname">
+                                   <input class="input--style-5" type="text" th:name="marketName">
                                </div>
                            </div>
                        </div>
@@ -119,7 +139,7 @@
                            <div class="name">가게이름</div>
                            <div class="value">
                                <div class="input-group">
-                                   <input class="input--style-5" type="text" name="storename">
+                                   <input class="input--style-5" type="text" th:name="storeName">
                                </div>
                            </div>
                        </div>
@@ -129,13 +149,13 @@
                            <div class="value">
                                <div class="input-group">
                                    <div class="rs-select2 js-select-simple select--no-search">
-                                       <select name="subject">
+                                       <select th:name="category">
                                            <option disabled="disabled" selected="selected">카테고리를 선택하세요</option>
-                                           <option>농산물</option>
-                                           <option>수산물</option>
-                                           <option>청과물</option>
-                                           <option>정육점</option>
-                                           <option>잡화점</option>
+                                           <option th:value="NONG_SAN_MUL">농산물</option>
+                                           <option th:value="SU_SAN_MUL">수산물</option>
+                                           <option th:value="CHEONG_GWA_MUL">청과물</option>
+                                           <option th:value="JEONG_YUK_JEOM">정육점</option>
+                                           <option th:value="JAP_HWA_JEOM">잡화점</option>
                                        </select>
                                        <div class="select-dropdown"></div>
                                    </div>
@@ -147,7 +167,9 @@
                            <div class="name">사업자 번호</div>
                            <div class="value">
                                <div class="input-group">
-                                   <input class="input--style-5" type="text" name="crnumber">
+                                   <label>
+                                       <input class="input--style-5" type="text" th:name="officeNumber">
+                                   </label>
                                </div>
                            </div>
                        </div>

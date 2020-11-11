@@ -1,5 +1,6 @@
 package kr.smarket.application;
 
+import kr.smarket.application.Domain.Member;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
