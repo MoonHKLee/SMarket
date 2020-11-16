@@ -1,5 +1,6 @@
 package kr.smarket.application.Controller;
 
+import kr.smarket.application.DTO.LoginRequest;
 import kr.smarket.application.DTO.SignUpBusinessRequest;
 import kr.smarket.application.DTO.SignUpRequest;
 import kr.smarket.application.Service.MemberService;
@@ -25,7 +26,7 @@ public class MemberController {
             Principal principal
     ) {
         memberService.createMemberBusiness(request);
-        return "index";
+        return "login";
     }
 
     @PostMapping("/signup-client")
@@ -35,6 +36,16 @@ public class MemberController {
             Principal principal
     ) {
         memberService.createMemberClient(request);
-        return "index";
+        return "login";
+    }
+
+    @PostMapping("/login")
+    public String login(
+            @ModelAttribute(name = "request") @Valid LoginRequest request,
+            Model model,
+            Principal principal
+    ) {
+        memberService.loadUserByUsername(request.getUserId());
+        return "login";
     }
 }

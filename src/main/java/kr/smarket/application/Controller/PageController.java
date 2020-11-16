@@ -1,6 +1,8 @@
 package kr.smarket.application.Controller;
 
+import kr.smarket.application.DTO.LoginRequest;
 import kr.smarket.application.DTO.SignUpBusinessRequest;
+import kr.smarket.application.DTO.SignUpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,7 +24,7 @@ public class PageController {
     }
 
     @GetMapping("/login")
-    public String getLoginPage(Model model) {
+    public String getLoginPage(@ModelAttribute(name = "request") LoginRequest request) {
         return "login";
     }
 
@@ -37,7 +39,7 @@ public class PageController {
     }
 
     @GetMapping("/signup-client")
-    public String getSignupClientPage(Model model) {
+    public String getSignupClientPage(@ModelAttribute(name = "request") SignUpRequest request, Model model) {
         return "registerClient";
     }
 

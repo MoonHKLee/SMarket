@@ -14,6 +14,9 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.factory.PasswordEncoderFactories;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -23,6 +26,8 @@ import org.springframework.transaction.annotation.Transactional;
 public class MemberService implements UserDetailsService {
 
     private final MemberRepository memberRepository;
+
+    PasswordEncoder encoder = PasswordEncoderFactories.createDelegatingPasswordEncoder();
 
     @Transactional
     public Member createMemberBusiness(SignUpBusinessRequest request) {
@@ -35,7 +40,7 @@ public class MemberService implements UserDetailsService {
         member.setUserId(request.getUserId());
         member.setAddress(request.getAddress());
         member.setEmail(request.getEmail());
-        member.setPassword(request.getPassword());
+        member.setPassword(encoder.encode(request.getPassword()));
         member.setPhoneNumber(request.getPhoneNumber());
         member.setRegion(regionToEnum(request.getRegion()));
         member.setRole(Role.USER);
@@ -49,7 +54,7 @@ public class MemberService implements UserDetailsService {
         return memberRepository.save(Member.builder()
                 .userName(request.getUserName())
                 .userId(request.getUserId())
-                .password(request.getPassword())
+                .password(encoder.encode(request.getPassword()))
                 .region(regionToEnum(request.getRegion()))
                 .email(request.getEmail())
                 .address(request.getAddress())
