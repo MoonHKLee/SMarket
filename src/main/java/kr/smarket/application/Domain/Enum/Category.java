@@ -5,5 +5,6 @@ public enum Category {
     SU_SAN_MUL,
     CHEONG_GWA_MUL,
     JEONG_YUK_JEOM,
-    JAP_HWA_JEOM
+    JAP_HWA_JEOM,
+    NONE
 }
