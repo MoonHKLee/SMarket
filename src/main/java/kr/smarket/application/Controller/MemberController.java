@@ -46,6 +46,6 @@ public class MemberController {
             Principal principal
     ) {
         memberService.loadUserByUsername(request.getUserId());
-        return "login";
+        return "index";
     }
 }
