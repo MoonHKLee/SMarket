@@ -25,57 +25,35 @@
     <p>&nbsp;</p>
     <p>&nbsp;</p>
     <div class="row">
-        <div class="col-sm-3"><!--left col-->
+        <form class="form" th:action="@{/register}" th:object="${request}" th:method="post" enctype="multipart/form-data" id="registrationForm">
+            <div class="col-sm-3"><!--left col-->
+                <div class="text-center">
+                    <div id='View_area' class="avatar img-thumbnail"></div>
+                    <h6>상품 사진을 올려주세요.</h6>
+                    <input type="file" id="image" th:name="image" onchange="previewImage(this,'View_area')">
+                </div>
+                <br>
 
-            <div class="text-center">
-                <img src="img/product.jpg" class="avatar img-circle img-thumbnail" alt="avatar">
-                <h6>상품 사진을 올려주세요.</h6>
-                <input type="file" class="text-center center-block file-upload">
-            </div>
-            </hr><br>
+            </div><!--/col-3-->
+            <div class="col-sm-9">
+                <ul class="nav nav-tabs">
+                    <li class="active"><a data-toggle="tab" href="#home">정보</a></li>
+                </ul>
 
 
-        </div><!--/col-3-->
-        <div class="col-sm-9">
-            <ul class="nav nav-tabs">
-                <li class="active"><a data-toggle="tab" href="#home">정보</a></li>
-            </ul>
-
-
-            <div class="tab-content">
-                <div class="tab-pane active" id="home">
-                    <hr>
-                    <form class="form" action="##" method="post" id="registrationForm">
+                <div class="tab-content">
+                    <div class="tab-pane active" id="home">
                         <div class="form-group">
-
                             <div class="col-xs-6">
-                                <label for="usermarket"><h4>시장 이름</h4></label>
-                                <input type="text" class="form-control" name="usermarket" id="usermarket"
-                                       placeholder="시장" title="시장 이름을 적어주세요.">
+                                <label for="productName"><h4>상품명</h4></label>
+                                <input type="text" class="form-control" th:name="productName" id="productName" placeholder="상품명"
+                                       title="상품명을 적어주세요.">
                             </div>
                         </div>
-                        <div class="form-group">
-
-                            <div class="col-xs-6">
-                                <label for="userstore"><h4>가게 이름</h4></label>
-                                <input type="text" class="form-control" name="userstore" id="userstore" placeholder="상점"
-                                       title="가게 이름을 적어주세요.">
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-
-                            <div class="col-xs-6">
-                                <label for="phone"><h4>연락처</h4></label>
-                                <input type="text" class="form-control" name="phone" id="phone"
-                                       placeholder="010-0000-0000" title="연락처를 남겨주세요.">
-                            </div>
-                        </div>
-
                         <div class="form-group">
                             <div class="col-xs-6">
                                 <label for="price"><h4>가격</h4></label>
-                                <input type="text" class="form-control" name="price" id="price" placeholder="원"
+                                <input type="text" class="form-control" th:name="price" id="price" placeholder="원"
                                        title="가격을 적어주세요.">
                             </div>
                         </div>
@@ -83,23 +61,15 @@
 
                             <div class="col-xs-6">
                                 <label for="weight"><h4>무게/단위</h4></label>
-                                <input type="weight" class="form-control" name="weight" id="weight" placeholder="kg/ml"
+                                <input type="text" class="form-control" th:name="weight" id="weight" placeholder="kg/ml"
                                        title="상품의 무게를 적어주세요.">
                             </div>
                         </div>
                         <div class="form-group">
 
                             <div class="col-xs-6">
-                                <label for="name"><h4>판매자 성함</h4></label>
-                                <input type="name" class="form-control" id="name" placeholder="name"
-                                       title="판매자 이름을 남겨주세요.">
-                            </div>
-                        </div>
-                        <div class="form-group">
-
-                            <div class="col-xs-6">
                                 <label for="appeal"><h4>상품 자랑 한마디</h4></label>
-                                <input type="appeal" class="form-control" name="appeal" id="appeal" placeholder="한마디"
+                                <input type="text" class="form-control" th:name="content" id="appeal" placeholder="한마디"
                                        title="상품을 자랑해주세요!">
                             </div>
                         </div>
@@ -113,10 +83,80 @@
                                 </button>
                             </div>
                         </div>
-                    </form>
-                </div><!--/tab-pane-->
-            </div><!--/col-9-->
-        </div><!--/row-->
+                    </div><!--/tab-pane-->
+                </div><!--/col-9-->
+            </div><!--/row-->
+        </form>
     </div>
 </div>
+<script>
+    function previewImage(targetObj, View_area) {
+        var preview = document.getElementById(View_area); //div id
+        var ua = window.navigator.userAgent;
+
+        //ie일때(IE8 이하에서만 작동)
+        if (ua.indexOf("MSIE") > -1) {
+            targetObj.select();
+            try {
+                var src = document.selection.createRange().text; // get file full path(IE9, IE10에서 사용 불가)
+                var ie_preview_error = document.getElementById("ie_preview_error_" + View_area);
+
+
+                if (ie_preview_error) {
+                    preview.removeChild(ie_preview_error); //error가 있으면 delete
+                }
+
+                var img = document.getElementById(View_area); //이미지가 뿌려질 곳
+
+                //이미지 로딩, sizingMethod는 div에 맞춰서 사이즈를 자동조절 하는 역할
+                img.style.filter = "progid:DXImageTransform.Microsoft.AlphaImageLoader(src='" + src + "', sizingMethod='scale')";
+            } catch (e) {
+                if (!document.getElementById("ie_preview_error_" + View_area)) {
+                    var info = document.createElement("<p>");
+                    info.id = "ie_preview_error_" + View_area;
+                    info.innerHTML = e.name;
+                    preview.insertBefore(info, null);
+                }
+            }
+            //ie가 아닐때(크롬, 사파리, FF)
+        } else {
+            var files = targetObj.files;
+            for (var i = 0; i < files.length; i++) {
+                var file = files[i];
+                var imageType = /image.*/; //이미지 파일일경우만.. 뿌려준다.
+                if (!file.type.match(imageType))
+                    continue;
+                var prevImg = document.getElementById("prev_" + View_area); //이전에 미리보기가 있다면 삭제
+                if (prevImg) {
+                    preview.removeChild(prevImg);
+                }
+                var img = document.createElement("img");
+                img.id = "prev_" + View_area;
+                img.classList.add("obj");
+                img.file = file;
+                img.style.width = '200px';
+                img.style.height = '200px';
+                preview.appendChild(img);
+                if (window.FileReader) { // FireFox, Chrome, Opera 확인.
+                    var reader = new FileReader();
+                    reader.onloadend = (function (aImg) {
+                        return function (e) {
+                            aImg.src = e.target.result;
+                        };
+                    })(img);
+                    reader.readAsDataURL(file);
+                } else { // safari is not supported FileReader
+                    //alert('not supported FileReader');
+                    if (!document.getElementById("sfr_preview_error_"
+                        + View_area)) {
+                        var info = document.createElement("p");
+                        info.id = "sfr_preview_error_" + View_area;
+                        info.innerHTML = "not supported FileReader";
+                        preview.insertBefore(info, null);
+                    }
+                }
+            }
+        }
+    }
+</script>
 </html>

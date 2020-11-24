@@ -1,7 +1,7 @@
 package kr.smarket.application.Service;
 
-import kr.smarket.application.DTO.SignUpBusinessRequest;
-import kr.smarket.application.DTO.SignUpRequest;
+import kr.smarket.application.DTO.Request.SignUpBusinessRequest;
+import kr.smarket.application.DTO.Request.SignUpRequest;
 import kr.smarket.application.Domain.BusinessMember;
 import kr.smarket.application.Domain.Enum.Category;
 import kr.smarket.application.Domain.Enum.Role;

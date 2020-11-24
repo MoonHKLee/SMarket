@@ -1,8 +1,8 @@
 package kr.smarket.application.Controller;
 
-import kr.smarket.application.DTO.LoginRequest;
-import kr.smarket.application.DTO.SignUpBusinessRequest;
-import kr.smarket.application.DTO.SignUpRequest;
+import kr.smarket.application.DTO.Request.LoginRequest;
+import kr.smarket.application.DTO.Request.SignUpBusinessRequest;
+import kr.smarket.application.DTO.Request.SignUpRequest;
 import kr.smarket.application.Service.MemberService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
