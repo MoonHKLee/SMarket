@@ -27,7 +27,7 @@ public class Product extends LogDateTime {
 
     private String src;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name="member_id")
     private BusinessMember member;
 }

@@ -8,10 +8,12 @@ import kr.smarket.application.DTO.Response.ProductResponse;
 import kr.smarket.application.Domain.Product;
 import kr.smarket.application.Service.ProductService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.security.Principal;
 
@@ -57,9 +59,21 @@ public class PageController {
     }
 
     @GetMapping("/search")
-    public String getSearchPage(@ModelAttribute(name = "data") ProductResponse response, Model model) {
-
-        model.addAttribute("list",productService.getAllProductList());
+    public String getSearchPage(
+            @ModelAttribute(name = "data") ProductResponse response,
+            @RequestParam(value = "marketName", defaultValue = "") String marketName,
+            @RequestParam(value = "productName", defaultValue = "") String productName,
+            @RequestParam(value = "page", defaultValue = "0") int page,
+            Model model
+    ) {
+        Page<Product> productPage = productService.getProductPage(marketName,productName,page);
+        model.addAttribute("marketName",marketName);
+        model.addAttribute("productName",productName);
+        model.addAttribute("startPage",(page) - (page % 10));
+        model.addAttribute("nowPage",page);
+        model.addAttribute("maxPage",10);
+        model.addAttribute("totalPages",productPage.getTotalPages());
+        model.addAttribute("list",productService.getAllProductList(productPage));
         return "search";
     }
 }
