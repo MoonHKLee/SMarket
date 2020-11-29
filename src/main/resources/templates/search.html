@@ -30,7 +30,6 @@
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
 </head>
 <body>
-<hr>
 <div class="container bootstrap snippet">
     <div style="background-color: black;" class="row">
         <div class="col-sm-10"><h1><font color="white">상품 검색</font></h1></div>
@@ -120,13 +119,7 @@
 <div class="wrapper">
     <nav aria-label="Page navigation example">
         <ul class="pagination">
-            <li class="page-item" th:if="${nowPage / 10 == 0}">
-                <a class="page-link" th:href="@{/search?(page=0)}" aria-label="Previous">
-                    <span aria-hidden="true">&laquo;</span>
-                    <span class="sr-only">Previous</span>
-                </a>
-            </li>
-            <li class="page-item" th:unless="${nowPage / 10 == 0}">
+            <li class="page-item" th:if="${nowPage / 10 == 0 && nowPage != 0}">
                 <a class="page-link" th:href="@{/search?(page=${startPage - 10})}" aria-label="Previous">
                     <span aria-hidden="true">&laquo;</span>
                     <span class="sr-only">Previous</span>
