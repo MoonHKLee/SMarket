@@ -30,7 +30,7 @@ public class ProductService {
                         .price(Integer.parseInt(request.getPrice()))
                         .productName(request.getProductName())
                         .src(src)
-                        .weight(Float.parseFloat(request.getWeight()))
+                        .weight(Integer.parseInt(request.getWeight()))
                         .build()
         );
     }
