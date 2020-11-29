@@ -26,7 +26,7 @@
             padding: 10px 0;
         }
     </style>
-    <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script src="http://code.jquery.com/jquery-2.2.4.min.js"></script>
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
 </head>
 <body>
@@ -66,7 +66,7 @@
             <div class="thumbnail">
                 <img style="height: 150px;" th:src="${data.src}">
                 <div class="caption">
-                    <span th:text="${data.id}" style="display: none;"></span>
+                    <span th:id="${data.id}" style="display: none;"></span>
                     <span th:text="${data.weight}" style="font-size: 20px;">무게 / </span>
                     <span th:text="${data.price}" style="font-size: 20px;">가격</span>
                     <br/>
@@ -76,7 +76,7 @@
                     <p th:text="${data.content}"></p>
                 </div>
                 <div class="btn-ground text-center">
-                    <button th:object="${data}" id="details" type="button" class="btn btn-primary" data-toggle="modal" data-target="#product_view"><i
+                    <button id="details" type="button" th:onclick="'ajax_submit(\'' + ${data.id} + '\')'" class="btn btn-primary" data-toggle="modal" data-target="#product_view"><i
                             class="fa fa-search"></i>상세보기
                     </button>
                 </div>
@@ -97,7 +97,7 @@
             <div class="modal-body">
                 <div class="row">
                     <div class="col-md-6 product_img">
-                        <img id="src">
+                        <img id="modal-src" style="width: 100%">
                     </div>
                     <div class="col-md-6 product_content">
                         <span id="modal-marketName" style="font-size: 20px;"></span> -
@@ -162,15 +162,31 @@
     </nav>
 </div>
 <script>
-
-    const id = document.getElementById('');
-    function onClick() {
-        const data = $('#details').serialize();
+    function ajax_submit(id) {
         $.ajax({
-            url:`/product/${}`
-        })
-    }
+            type: 'GET',
+            contentType: 'application/json; charset=utf-8',
+            url: `http://localhost:8080/product/${id}`,
+            dataType: 'json',
+            cache: false,
+            timeout: 600000,
+            success: function (data) {
+                document.getElementById('modal-src').setAttribute('src',data.src);
+                document.getElementById('modal-marketName').innerHTML = data.marketName;
+                document.getElementById('modal-productName').innerHTML = data.productName;
+                document.getElementById('modal-storeName').innerHTML = data.storeName;
+                document.getElementById('modal-weight').innerHTML = data.weight;
+                document.getElementById('modal-price').innerHTML = data.price + '원';
+                document.getElementById('modal-userName').innerHTML = data.userName;
+                document.getElementById('modal-phoneNumber').innerHTML = data.phoneNumber;
+                document.getElementById('modal-content').innerHTML = data.content;
+            },
+            error: function (e) {
+                console.log('실패');
+            }
+        });
 
+    }
 </script>
 </body>
 </html>

@@ -1,6 +1,7 @@
 package kr.smarket.application.Controller;
 
 import kr.smarket.application.DTO.Request.RegisterProductRequest;
+import kr.smarket.application.DTO.Response.ProductResponse;
 import kr.smarket.application.Domain.BusinessMember;
 import kr.smarket.application.Domain.Enum.UserType;
 import kr.smarket.application.Domain.Member;
@@ -16,10 +17,7 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.Valid;
@@ -37,24 +35,10 @@ public class ProductController {
     private final MemberRepository memberRepository;
     private final BusinessMemberRepository businessMemberRepository;
 
-    @GetMapping("/dashboard")
-    public String dashboard(Model model, Principal principal) {
-        if (principal == null) {
-            model.addAttribute("message","Hello, Spring Security");
-        } else {
-            model.addAttribute("message","WelCome DashBoard, " + principal.getName());
-        }
-        return "dashboard";
-    }
-
-    @GetMapping("/admin")
-    public String admin(Model model, Principal principal) {
-        if (principal == null) {
-            model.addAttribute("message","Hello, Spring Security");
-        } else {
-            model.addAttribute("message","WelCome Admin, " + principal.getName());
-        }
-        return "admin";
+    @GetMapping("/product/{id}")
+    @ResponseBody
+    public ProductResponse getPost(Model model, Principal principal, @PathVariable Long id) {
+        return productService.getProduct(id);
     }
 
     @PostMapping("/register")

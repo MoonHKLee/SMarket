@@ -52,4 +52,20 @@ public class ProductService {
         return productRepository.findAll(pageRequest);
     }
 
+    public ProductResponse getProduct(Long id) {
+        Product product = productRepository.findProductById(id);
+        ProductResponse response = new ProductResponse();
+        response.setId(product.getId());
+        response.setContent(product.getContent());
+        response.setMarketName(product.getMember().getMarketName());
+        response.setPhoneNumber(product.getMember().getPhoneNumber());
+        response.setPrice(product.getPrice());
+        response.setProductName(product.getProductName());
+        response.setSrc(product.getSrc());
+        response.setStoreName(product.getMember().getStoreName());
+        response.setUserName(product.getMember().getUserName());
+        response.setWeight(product.getWeight());
+        return response;
+    }
+
 }
