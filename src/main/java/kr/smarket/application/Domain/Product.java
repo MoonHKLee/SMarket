@@ -19,7 +19,7 @@ public class Product extends LogDateTime {
 
     private String productName;
 
-    private Float weight;
+    private Integer weight;
 
     private Integer price;
 

@@ -104,7 +104,7 @@
                         <span id="modal-productName" style="font-size: 20px;"></span>
                         <hr/>
                         <p id="modal-storeName"></p>
-                        <span id="modal-weight" style="font-size: 15px;"></span> /
+                        <span id="modal-weight" style="font-size: 15px;"></span>(g) /
                         <span id="modal-price" style="font-size: 15px;"></span>
                         <p id="modal-userName">판매자 성함</p>
                         <p id="modal-phoneNumber">판매자 연락처</p>
@@ -166,7 +166,7 @@
         $.ajax({
             type: 'GET',
             contentType: 'application/json; charset=utf-8',
-            url: `http://localhost:8080/product/${id}`,
+            url: `http://3.34.61.71:8080/product/${id}`,
             dataType: 'json',
             cache: false,
             timeout: 600000,

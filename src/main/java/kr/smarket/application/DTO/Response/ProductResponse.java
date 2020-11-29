@@ -17,7 +17,7 @@ public class ProductResponse {
 
     private String marketName;
 
-    private Float weight;
+    private Integer weight;
 
     private Integer price;
 
