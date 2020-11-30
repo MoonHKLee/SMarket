@@ -1,13 +1,12 @@
 package kr.smarket.application.Controller;
 
-import kr.smarket.application.DTO.Request.LoginRequest;
-import kr.smarket.application.DTO.Request.RegisterProductRequest;
-import kr.smarket.application.DTO.Request.SignUpBusinessRequest;
-import kr.smarket.application.DTO.Request.SignUpRequest;
+import kr.smarket.application.DTO.Request.*;
+import kr.smarket.application.DTO.Response.OpinionResponse;
 import kr.smarket.application.DTO.Response.ProductResponse;
 import kr.smarket.application.Domain.Enum.UserType;
 import kr.smarket.application.Domain.Product;
 import kr.smarket.application.Service.MemberService;
+import kr.smarket.application.Service.OpinionService;
 import kr.smarket.application.Service.ProductService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -25,6 +24,7 @@ public class PageController {
 
     private final ProductService productService;
     private final MemberService memberService;
+    private final OpinionService opinionService;
 
     @GetMapping("/")
     public String getIndexPage(Model model, Authentication authentication) {
@@ -57,6 +57,7 @@ public class PageController {
 
     @GetMapping("/opinion")
     public String getOpinionPage(Model model) {
+        model.addAttribute("opinions",opinionService.getAllOpinions());
         return "opinion";
     }
 

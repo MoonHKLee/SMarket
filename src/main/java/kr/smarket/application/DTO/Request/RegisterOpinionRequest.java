@@ -1,5 +1,8 @@
 package kr.smarket.application.DTO.Request;
 
-public class RegisterOpinionRequest {
+import lombok.Data;
 
+@Data
+public class RegisterOpinionRequest {
+    String content;
 }
