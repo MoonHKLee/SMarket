@@ -8,8 +8,10 @@ import kr.smarket.application.Domain.Enum.Role;
 import kr.smarket.application.Domain.Enum.UserType;
 import kr.smarket.application.Domain.Member;
 import kr.smarket.application.Domain.Enum.Region;
+import kr.smarket.application.Repository.BusinessMemberRepository;
 import kr.smarket.application.Repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -25,6 +27,7 @@ import org.springframework.transaction.annotation.Transactional;
 public class MemberService implements UserDetailsService {
 
     private final MemberRepository memberRepository;
+    private final BusinessMemberRepository businessMemberRepository;
 
     PasswordEncoder encoder = PasswordEncoderFactories.createDelegatingPasswordEncoder();
 
@@ -133,6 +136,15 @@ public class MemberService implements UserDetailsService {
                 return Category.SU_SAN_MUL;
             default:
                 return Category.NONE;
+        }
+    }
+
+    public BusinessMember getMember(UserDetails userDetails) {
+        Member member = memberRepository.findByUserId(userDetails.getUsername());
+        if (member.getUserType()== UserType.CLIENT) {
+            return (BusinessMember)member;
+        } else {
+            return businessMemberRepository.findByUserId(userDetails.getUsername());
         }
     }
 }

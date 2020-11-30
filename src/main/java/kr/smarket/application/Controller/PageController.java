@@ -5,31 +5,33 @@ import kr.smarket.application.DTO.Request.RegisterProductRequest;
 import kr.smarket.application.DTO.Request.SignUpBusinessRequest;
 import kr.smarket.application.DTO.Request.SignUpRequest;
 import kr.smarket.application.DTO.Response.ProductResponse;
+import kr.smarket.application.Domain.Enum.UserType;
 import kr.smarket.application.Domain.Product;
+import kr.smarket.application.Service.MemberService;
 import kr.smarket.application.Service.ProductService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import java.security.Principal;
-
 @Controller
 @RequiredArgsConstructor
 public class PageController {
 
     private final ProductService productService;
+    private final MemberService memberService;
 
     @GetMapping("/")
-    public String getIndexPage(Model model, Principal principal) {
-        if (principal == null) {
-            model.addAttribute("message","Hello, Spring Security");
-        } else {
-            model.addAttribute("message","WelCome back, " + principal.getName());
+    public String getIndexPage(Model model, Authentication authentication) {
+        if(authentication==null) {
+            return "index";
         }
+        model.addAttribute("userType",memberService.getMember((UserDetails) authentication.getPrincipal()).getUserType());
         return "index";
     }
 

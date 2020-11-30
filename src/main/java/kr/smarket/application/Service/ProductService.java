@@ -42,7 +42,7 @@ public class ProductService {
     }
 
     public Page<Product> getProductPage(String marketName, String productName, int page) {
-        PageRequest pageRequest = PageRequest.of(page, 3, Sort.by(Sort.Direction.DESC,"id"));
+        PageRequest pageRequest = PageRequest.of(page, 6, Sort.by(Sort.Direction.DESC,"id"));
         if (marketName.length()!=0) {
             return productRepository.findAllByMarketName(marketName,pageRequest);
         }

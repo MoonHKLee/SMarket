@@ -5,6 +5,8 @@ import kr.smarket.application.DTO.Request.SignUpBusinessRequest;
 import kr.smarket.application.DTO.Request.SignUpRequest;
 import kr.smarket.application.Service.MemberService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -42,10 +44,11 @@ public class MemberController {
     @PostMapping("/login")
     public String login(
             @ModelAttribute(name = "request") @Valid LoginRequest request,
-            Model model,
-            Principal principal
+            Model model
     ) {
-        memberService.loadUserByUsername(request.getUserId());
+        UserDetails userDetails = memberService.loadUserByUsername(request.getUserId());
+        System.out.println(memberService.getMember(userDetails).getUserType());
+        model.addAttribute("userType",memberService.getMember(userDetails).getUserType());
         return "index";
     }
 }
