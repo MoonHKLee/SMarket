@@ -25,11 +25,12 @@ public class OpinionController {
     }
 
     @GetMapping("/opinions")
-    @ResponseBody
-    public List<OpinionResponse> getSearchedOpinions(
-            @RequestParam(value = "content", defaultValue = "") String content
+    public String getSearchedOpinions(
+            @RequestParam(value = "content", defaultValue = "") String content,
+            Model model
     ) {
-        return opinionService.getSearchedOpinions(content);
+        model.addAttribute("opinions",opinionService.getSearchedOpinions(content));
+        return "opinion";
     }
 
     @PostMapping("/opinion")
@@ -38,8 +39,10 @@ public class OpinionController {
             Authentication authentication,
             Model model
     ) {
-        opinionService.createOpinion(request.getContent(), (UserDetails) authentication.getPrincipal());
+        OpinionResponse opinion = opinionService.createOpinion(request.getContent(), (UserDetails) authentication.getPrincipal());
+        System.out.println(opinion);
         model.addAttribute("opinions",opinionService.getAllOpinions());
+        model.addAttribute("opinion",opinion);
         return "opinion";
     }
 }

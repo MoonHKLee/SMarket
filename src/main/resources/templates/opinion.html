@@ -163,47 +163,17 @@
 <div class="container">
     <div class="row">
         <form style="margin-left: 0" th:action="@{/opinions}" th:method="get">
-            <input type="text" th:value="${marketName}" placeholder="후기 검색하기" name="marketName" title="검색">
-            <input type="submit" value="검색">
+            <input type="text" placeholder="후기 검색하기" name="content" title="검색">
+            <input type="submit" id="search-form" th:onclick="getSearch()" value="검색">
         </form>
     </div>
     <div class="row">
 <!--전체후기 + 후기검색-->
         <div class="conversation-wrap col-lg-3" style="border: 1px solid #FAFAFA; min-height: 400px;">
-            <div class="media conversation">
-                <div class="media-body">
-                    <h5 class="media-heading">hodo**@naver.com</h5>
-                    <small>This is for market placing site</small>
-                </div>
-            </div>
-            <div class="media conversation">
-                <div class="media-body">
-                    <h5 class="media-heading">hodo**@naver.com</h5>
-                    <small>This is for market placing site</small>
-                </div>
-            </div>
-            <div class="media conversation">
-                <div class="media-body">
-                    <h5 class="media-heading">hodo**@naver.com</h5>
-                    <small>This is for market placing site</small>
-                </div>
-            </div>
-            <div class="media conversation">
-                <div class="media-body">
-                    <h5 class="media-heading">hodo**@naver.com</h5>
-                    <small>This is for market placing site</small>
-                </div>
-            </div>
-            <div class="media conversation">
-                <div class="media-body">
-                    <h5 class="media-heading">hodo**@naver.com</h5>
-                    <small>This is for market placing site</small>
-                </div>
-            </div>
-            <div class="media conversation">
-                <div class="media-body">
-                    <h5 class="media-heading">hodo**@naver.com</h5>
-                    <small>This is for market placing site</small>
+            <div class="media conversation" th:each="data, i:${opinions}">
+                <div class="media-body media-heading" th:onclick="'getOpinion(\'' + ${data.id} + '\')'">
+                    <h5 class="media-heading" id="userName" th:text="${data.getUserName()}"></h5>
+                    <small th:text="${data.getContent()}" id="opinions-content"></small>
                 </div>
             </div>
         </div>
@@ -212,27 +182,49 @@
 <!--            후기내용-->
             <div class="msg-wrap">
                 <div class="media msg ">
-                    <div class="media-body">
-                        <small class="pull-right time"><i class="fa fa-clock-o"></i> 12:10am</small>
-                        <h5 class="media-heading">hodo**@naver.com</h5>
-                        <pre style="background-color: white; border: none; font-size: small">이 글은 전통시장을 살리기 위한 목적으로 만들어졌으며 캡스톤 디자인 수업에 사용되고 있습니다.</pre>
+                    <div th:if="${opinion!=null}" class="media-body">
+                        <small id="opinion-time" th:text="${opinion.getTime()}" class="pull-right time"><i class="fa fa-clock-o"></i> 12:10am</small>
+                        <h5 id="opinion-username" th:text="${opinion.getUserName()}" class="media-heading">hodo**@naver.com</h5>
+                        <pre id="opinion-content" th:text="${opinion.getContent()}" style="background-color: white; border: none; font-size: small">이 글은 전통시장을 살리기 위한 목적으로 만들어졌으며 캡스톤 디자인 수업에 사용되고 있습니다.</pre>
+                    </div>
+                    <div th:unless="${opinion!=null}" class="media-body">
+                        좌측 내용을 클릭
                     </div>
                 </div>
             </div>
 <!--            후기 작성폼-->
-            <div class="send-wrap">
-                <label>
-                    <textarea class="form-control send-message" rows="3" placeholder="후기 남기기"></textarea>
-                </label>
-            </div>
-            <div class="btn-panel">
-                <a href="" class=" col-lg-4 text-right btn send-message-btn pull-right" role="button"><i class="fa fa-plus"></i> 글쓰기</a>
-            </div>
+            <form th:action="@{/opinion}" th:method="post">
+                <div class="send-wrap">
+                    <textarea class="form-control send-message" name="content" rows="3" style="width: 100%"
+                              placeholder="후기 남기기"></textarea>
+                </div>
+                <div class="btn-panel">
+                    <input type="submit" class=" col-lg-4 text-right btn send-message-btn pull-right" value="글쓰기">
+                </div>
+            </form>
         </div>
     </div>
 </div>
-<script type="text/javascript">
-
+<script>
+    function getOpinion(id) {
+        console.log(id);
+        $.ajax({
+            type: 'GET',
+            contentType: 'application/json; charset=utf-8',
+            url: `http://3.34.61.71:8080/product/${id}`,
+            dataType: 'json',
+            cache: false,
+            timeout: 600000,
+            success: function (data) {
+                document.getElementById('opinion-time').innerHTML = data.time;
+                document.getElementById('opinion-content').innerHTML = data.content;
+                document.getElementById('opinion-username').innerHTML = data.userName;
+            },
+            error: function (e) {
+                console.log('실패');
+            }
+        });
+    }
 </script>
 </body>
 </html>

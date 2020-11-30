@@ -47,6 +47,7 @@ public class OpinionService {
                 .id(opinion.getId())
                 .userName(opinion.getMember().getUserName())
                 .content(opinion.getContent())
+                .time(opinion.getCreatedAt().toString())
                 .build();
     }
 

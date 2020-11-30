@@ -58,6 +58,7 @@ public class PageController {
     @GetMapping("/opinion")
     public String getOpinionPage(Model model) {
         model.addAttribute("opinions",opinionService.getAllOpinions());
+        model.addAttribute("opinion",null);
         return "opinion";
     }
 
