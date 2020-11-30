@@ -20,7 +20,7 @@ public class OpinionService {
     private final MemberService memberService;
 
     public List<OpinionResponse> getAllOpinions() {
-        return convertToResponseList(opinionRepository.findAll());
+        return convertToResponseList(opinionRepository.findAllByOrderByIdDesc());
     }
 
     private List<OpinionResponse> convertToResponseList(List<Opinion> opinions) {

@@ -173,7 +173,8 @@
             <div class="media conversation" th:each="data, i:${opinions}">
                 <div class="media-body media-heading" th:onclick="'getOpinion(\'' + ${data.id} + '\')'">
                     <h5 class="media-heading" id="userName" th:text="${data.getUserName()}"></h5>
-                    <small th:text="${data.getContent()}" id="opinions-content"></small>
+                    <small th:if="${data.getContent().length()<=20}" th:text="${data.getContent()}" style="text-overflow: ellipsis;" id="opinions-content"></small>
+                    <small th:unless="${data.getContent().length()<=20}" th:text="${data.getContent().substring(0,20)+'...'}" style="text-overflow: ellipsis;" id="opinions-content"></small>
                 </div>
             </div>
         </div>
